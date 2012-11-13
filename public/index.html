@@ -1,0 +1,12 @@
+<body bgcolor="#000">
+	<a href="link1" ></a>
+	<a href="link2" ></a>
+</body>
+      #@items[0] = response.body.encode!("UTF-8", response.body.encoding)
+     # body=   "<a href=\"link1\" ></a>\
+  #<a href='link2' ></a>"#response.body
+  #    @items[0]=body[/"\S/] << " " #while body[/"\S/]
+      #body[/'(?=\S)/] << " " while body[/'\S/]
+
+
+pattern = /<a.*(?<link>(?<=href=').*(?='>))|(?<link>(?<=href=").*(?=">)).*/
