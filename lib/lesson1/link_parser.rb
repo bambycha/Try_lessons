@@ -6,18 +6,27 @@ module Lesson1
 
     def initialize(url)
       @url = url
-      @items = []
+      @items = {}
     end
 
     # Load and parse link
     def parse!
       response = HTTParty.get(@url)
-      pattern = /<a.*<\/a>/
-      pattern =~ response.body
-      @items << $&
-      while pattern =~ $~.post_match
-        @items << $&
+      pattern = /<a (href\s*=\s*(?:"([^"]*)"|'([^']*)'|([^'">\s]+)))*>(.*?)<\/a>/i
+      body = response.body
+      while pattern =~ body
+        @uri=$1
+        @obj=$+
+        clean!
+        @items["#{@uri}"] = @obj
+        body = $~.post_match
       end
+    end
+
+    def clean!
+      @uri.gsub!(/href\s*=\s*/i, "")
+      @obj.gsub!(/(style\s*=\s*("([^"]*)"|'([^']*)'|([^'">\s]+)))*/i, "")
+      @obj.gsub!(/<font\s+.*([^'">\s]+)*>/i, "")
     end
   end
 end

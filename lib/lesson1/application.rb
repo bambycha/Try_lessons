@@ -23,12 +23,16 @@ module Lesson1
       erb :links
     end
 
+    get '/links' do
+      erb :index
+    end
+
     get '/contact' do
       erb :contact
     end
 
     post '/contact' do
-      @email = Contact.new(params[:name], [:email], [:feedback])
+      @email = Contact.new(params[:name], params[:email], params[:feedback])
       @email.send
       erb :contact_us
     end
