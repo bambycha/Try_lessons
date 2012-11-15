@@ -4,6 +4,7 @@ require 'lesson1/config'
 require 'lesson1/application'
 require 'lesson1/link_parser'
 require 'lesson1/contact'
+require 'lesson1/data_valid'
 
 module Lesson1
   # Load configuration
