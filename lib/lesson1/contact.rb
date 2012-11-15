@@ -18,7 +18,7 @@ module Lesson1
                               :port                 => 587,
                               :domain               => 'localhost',
                               :user_name            => '2233965',
-                              :password             => '02z105201r',
+                              :password             => 'foobar',
                               :authentication       => 'plain',
                               :enable_starttls_auto => true  }
       end
