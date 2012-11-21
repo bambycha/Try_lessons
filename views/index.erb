@@ -1,6 +1,24 @@
-<h1>Enter url</h1>
-<form action="/links" method="POST">
-  <input type="text" name="url" />
-  <input type="submit" value="Send">
-  <%= @trust.msg %>
-</form>
+<head></head>
+<body>
+<title> TODO's </title>
+<a href="/signup">Зарегистрироваться</a>
+  <form method="post" action="/">
+  <table bgcolor="#cccccc">
+    <tr>
+      <td colspan=2>Вход для зарегистрированных пользователей:</td>
+    </tr>
+    <tr>
+      <td>Имя:</td>
+      <td><input type="text" name="username"></td>
+    </tr>
+    <tr>
+      <td>Пароль:</td>
+      <td><input type="password" name="passwd"></td>
+    </tr>
+    <tr>
+      <td colspan=2 align="center">
+      <input type="submit" value="Вход"></td>
+    </tr>
+  </table>
+  </form>
+</body>

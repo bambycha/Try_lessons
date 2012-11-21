@@ -1,6 +1,20 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    activemodel (3.0.3)
+      activesupport (= 3.0.3)
+      builder (~> 2.1.2)
+      i18n (~> 0.4)
+    activerecord (3.0.3)
+      activemodel (= 3.0.3)
+      activesupport (= 3.0.3)
+      arel (~> 2.0.2)
+      tzinfo (~> 0.3.23)
+    activerecord-mysql2-adapter (0.0.3)
+      mysql2
+    activesupport (3.0.3)
+    arel (2.0.7)
+    builder (2.1.2)
     daemons (1.1.9)
     database_cleaner (0.6.7)
     diff-lcs (1.1.3)
@@ -22,6 +36,7 @@ GEM
     mime-types (1.19)
     multi_json (1.3.7)
     multi_xml (0.5.1)
+    mysql2 (0.3.11)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-contrib (1.1.0)
@@ -53,17 +68,21 @@ GEM
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
+    tzinfo (0.3.24)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord
+  activerecord-mysql2-adapter
   database_cleaner (~> 0.6.7)
   ensure-encoding
   erubis
   fuubar
   httparty
   mail
+  mysql2
   rack
   rack-contrib (~> 1.1.0)
   rack-test (~> 0.6.0)

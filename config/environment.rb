@@ -14,4 +14,4 @@ Dir["#{File.dirname(__FILE__)}/initializers/*.rb"].sort.each do |path|
   require File.expand_path("../initializers/#{File.basename(path, '.rb')}", __FILE__)
 end
 
-require "lesson1"
+require "lesson2"
