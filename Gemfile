@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 source 'http://rubygems.org'
 
 gem "rack"
@@ -21,12 +20,3 @@ group :test do
   gem "database_cleaner", "~> 0.6.7"
   gem "fuubar"
 end
-=======
-source :gemcutter
-
-gem "sinatra"
-gem "koala"
-gem "json"
-gem "httparty"
-gem "thin"
->>>>>>> dd098e945e905c67ac3411dd395d6653982e7011
