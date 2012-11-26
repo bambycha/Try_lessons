@@ -20,13 +20,32 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
+    <script type="text/javascript">
+    var windowHeight = screen.availHeight-150+"px";
+    function set_textarea_height(){
+    document.getElementById("todo_body").style.height = windowHeight;
+    }
+    onload=set_textarea_height;
+    var id_pervios
+    function make_active(id_active, id_pervios) {
+        if (window.id_pervios === undefined){ 
+        document.getElementById(id_active).className = "active";
+        window.id_pervios = id_active;
+       } else {
+        document.getElementById(window.id_pervios).className = "";
+        document.getElementById(id_active).className = "active";
+        window.id_pervios = id_active;
+      }
+    }
+    </script>
     <!-- Fav and touch icons -->
     <link rel="shortcut icon" href="../assets/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+    <script src="../assets/js/ajax_functions.js"></script>
+    <script type="text/javascript"> var myReq = getXMLHTTPRequest(); </script>
   </head>
 
   <body>
@@ -49,34 +68,56 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container" style="border: 4px double black; height: auto !important; height: 100%; min-height: 90%">
 
-     <div id="block-jquerymenu-1" class="clear-block block">
-    <h2>Users</h2>
-    <div class="border">
-    <div class="content">
-    <ul class="menu">
+      <div class="row-fluid">
 
-    </ul></div></div>
-    </div>
+        <div class="span3" style="margin-left: 5px;">
+          <ul class="nav nav-list">
+            <li class="nav-header pull-left">TODO's List</li>
+            <a class="btn btn-small" onclick="JavaScript:send_todo(<%= @todo_list.length %>);"><i class="icon-plus"></i></a>
+            <li class="divider"></li>
+            <% @todo_list.each do |todo| -%>
+            <li id="<%= todo.id %>" onclick="make_active(this.id);"><a><%= todo.head %></a></li>
+            <% end -%>
+          </ul>
+        </div>
+        
+        <div class="span7" style="border: 4px double black; margin-left: 5px;">
+          <div id="txt"></div>
+          <textarea id="todo_body" class="span12"></textarea>
+        </div>
+        
+        <div class="span2">
+           <div class="btn-group dropdown span12">
+            <a class="btn btn-primary span12" href="#"><i class="icon-user icon-white"></i> User</a>
+            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" data-target="#"><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
+              <li><a href="#"><i class="icon-trash"></i> Delete</a></li>
+              <li><a href="#"><i class="icon-ban-circle"></i> Ban</a></li>
+              <li class="divider"></li>
+              <li><a href="#"><i class="i"></i> Make admin</a></li>
+            </ul>
+            </div>
+          <select multiple="multiple" size="<%= @user_list.length %>">
+            <% @user_list.each do |user| -%>
+            <option><%= user.fname + " " + user.sname %></option>
+            <% end -%>
+          </select>
+        </div>
+
+      </div>
+
     </div> <!-- /container -->
 
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="../assets/js/jquery.js"></script>
-    <script src="../assets/js/bootstrap-transition.js"></script>
-    <script src="../assets/js/bootstrap-alert.js"></script>
-    <script src="../assets/js/bootstrap-modal.js"></script>
+    <script src="../assets/js/bootstrap.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/bootstrap-dropdown.js"></script>
-    <script src="../assets/js/bootstrap-scrollspy.js"></script>
-    <script src="../assets/js/bootstrap-tab.js"></script>
-    <script src="../assets/js/bootstrap-tooltip.js"></script>
-    <script src="../assets/js/bootstrap-popover.js"></script>
-    <script src="../assets/js/bootstrap-button.js"></script>
-    <script src="../assets/js/bootstrap-collapse.js"></script>
-    <script src="../assets/js/bootstrap-carousel.js"></script>
-    <script src="../assets/js/bootstrap-typeahead.js"></script>
 
   </body>
 </html>

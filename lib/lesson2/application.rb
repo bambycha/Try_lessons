@@ -61,7 +61,16 @@ module Lesson2
 
     get '/admin' do
       protected!
+      @todo = Todos.new
+      @todo_list = @todo.list
+      @admin = Admin.new
+      @user_list = @admin.user_list
       erb :admin
+    end
+
+    post '/save_todo' do
+      Todos.new.save(env['rack.request.form_hash']) #TODO filter user input
+      #return env['rack.request.form_hash']['id'].to_s
     end
 
   end

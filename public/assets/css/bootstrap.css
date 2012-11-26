@@ -34,6 +34,7 @@ audio:not([controls]) {
 }
 
 html {
+  height: 100%;
   font-size: 100%;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
@@ -159,6 +160,7 @@ textarea {
 }
 
 body {
+  height: 100%;
   margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
@@ -1094,9 +1096,10 @@ input[type="file"] {
 }
 
 select {
-  width: 220px;
+  width: 100%;
   background-color: #ffffff;
   border: 1px solid #cccccc;
+  height: auto;
 }
 
 select[multiple],

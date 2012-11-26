@@ -4,6 +4,8 @@ require 'lesson2/config'
 require 'lesson2/application'
 require 'lesson2/handle'
 require 'lesson2/data_valid'
+require 'lesson2/todo'
+require 'lesson2/admin'
 #require 'lesson2/db'
 module Lesson2
   # Load configuration
