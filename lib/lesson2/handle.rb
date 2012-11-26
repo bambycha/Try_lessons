@@ -8,14 +8,6 @@ module Lesson2
 		class Handle
 		attr_reader :out
 
-		ActiveRecord::Base.establish_connection(
-		  :adapter  => "mysql2",
-		  :host     => "localhost",
-		  :username => "todo_user",
-		  :password => "foobar",
-		  :database => "todo"
-		)
-
 		def initialize(env)
 			@env = env['rack.request.form_hash']
 			@email = @env["email"]
@@ -25,12 +17,7 @@ module Lesson2
 			@time = Time.now.getutc
 		end
 
-		class User < ActiveRecord::Base
-		end
-
 		def new_user
-			#@user_var =  [@email , @fname , @sname , @passwd]
-			# productproperty = ProductProperty.find_or_create_by_product_id(product.id) { |u| u.property_id => property_id, u.value => d[descname] } )
 			@user = User.find_or_create_by_email(@email,
 				:fname => @fname.to_s,
 				:sname => @sname.to_s,
@@ -46,11 +33,3 @@ module Lesson2
 	end
 
 end
-
-			# @user = User.new(
-			# 	:email => @email.to_s,
-			# 	:fname => @fname.to_s,
-			# 	:sname => @sname.to_s,
-			# 	:passwd => @passwd,
-			# 	:date => @time
-			# 	)

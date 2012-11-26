@@ -19,4 +19,19 @@ module Lesson2
   def self.root_path
     @root_path ||= Pathname.new( File.dirname(File.expand_path('../', __FILE__)) )
   end
+
+ActiveRecord::Base.establish_connection(
+      :adapter  => "mysql2",
+      :host     => "localhost",
+      :username => "todo_user",
+      :password => "foobar",
+      :database => "todo"
+    )
+
+  class Todo < ActiveRecord::Base
+  end
+
+  class User < ActiveRecord::Base
+  end
+
 end

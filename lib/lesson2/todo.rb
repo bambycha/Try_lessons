@@ -5,17 +5,6 @@ module Lesson2
 	class Todos
 		attr_reader :todo_list, :todo_save
 
-		ActiveRecord::Base.establish_connection(
-		  :adapter  => "mysql2",
-		  :host     => "localhost",
-		  :username => "todo_user",
-		  :password => "foobar",
-		  :database => "todo"
-		)
-
-		class Todo < ActiveRecord::Base
-		end
-
 		def list
 			@todo_list = Todo.select("id, head").all
 			return @todo_list
