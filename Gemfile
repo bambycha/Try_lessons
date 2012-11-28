@@ -13,6 +13,7 @@ gem "mysql2"
 gem "activerecord"
 gem "activerecord-mysql2-adapter"
 gem 'omniauth-facebook'
+gem "multi_json"
 
 group :test do
   gem "rspec", "~> 2.7.0"

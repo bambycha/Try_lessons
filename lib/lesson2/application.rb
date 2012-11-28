@@ -4,6 +4,7 @@ require 'sinatra'
 require 'erubis'
 require "rack/contrib"
 require "rack"
+require "multi_json"
 #require 'omniauth'#!
 
 module Lesson2
