@@ -82,7 +82,7 @@ module Lesson2
     # (see notes above in /canvas/ method for more details)
     #content_type 'application/json'
     #MultiJson.encode(request.env)
-    puts "some"
+    :out
   end
 
 
