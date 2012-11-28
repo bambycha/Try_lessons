@@ -76,5 +76,13 @@ module Lesson2
       #return env['rack.request.form_hash']['id'].to_s
     end
 
+      get '/auth/:provider/callback' do
+    # we can do something special here is +state+ param is canvas
+    # (see notes above in /canvas/ method for more details)
+    content_type 'application/json'
+    MultiJson.encode(request.env)
+  end
+
+
   end
 end
