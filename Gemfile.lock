@@ -99,6 +99,7 @@ DEPENDENCIES
   fuubar
   httparty
   mail
+  multi_json
   mysql2
   omniauth-facebook
   rack
