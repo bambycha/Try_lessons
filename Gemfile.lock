@@ -15,7 +15,6 @@ GEM
     activesupport (3.0.3)
     arel (2.0.7)
     builder (2.1.2)
-    crack (0.1.8)
     daemons (1.1.9)
     database_cleaner (0.6.7)
     diff-lcs (1.1.3)
@@ -29,13 +28,20 @@ GEM
       rspec-instafail (~> 0.2.0)
       ruby-progressbar (~> 1.0.0)
     hashie (1.2.0)
-    httparty (0.7.8)
-      crack (= 0.1.8)
+    httparty (0.9.0)
+      multi_json (~> 1.0)
+      multi_xml
     httpauth (0.2.0)
     i18n (0.6.1)
     jwt (0.1.5)
       multi_json (>= 1.0)
+    mail (2.4.4)
+      i18n (>= 0.4.0)
+      mime-types (~> 1.16)
+      treetop (~> 1.4.8)
+    mime-types (1.19)
     multi_json (1.3.7)
+    multi_xml (0.5.1)
     multipart-post (1.1.5)
     mysql2 (0.3.11)
     oauth2 (0.8.0)
@@ -52,9 +58,12 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
+    polyglot (0.3.3)
     rack (1.4.1)
     rack-contrib (1.1.0)
       rack (>= 0.9.1)
+    rack-protection (1.2.0)
+      rack
     rack-test (0.6.2)
       rack (>= 1.0)
     rake (0.9.4)
@@ -68,14 +77,18 @@ GEM
     rspec-instafail (0.2.4)
     rspec-mocks (2.7.0)
     ruby-progressbar (1.0.2)
-    sinatra (1.2.6)
-      rack (~> 1.1)
-      tilt (>= 1.2.2, < 2.0)
-    thin (1.2.11)
+    sinatra (1.3.3)
+      rack (~> 1.3, >= 1.3.6)
+      rack-protection (~> 1.2)
+      tilt (~> 1.3, >= 1.3.3)
+    thin (1.5.0)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
     tilt (1.3.3)
+    treetop (1.4.12)
+      polyglot
+      polyglot (>= 0.3.1)
     tzinfo (0.3.24)
 
 PLATFORMS
@@ -89,6 +102,7 @@ DEPENDENCIES
   erubis
   fuubar
   httparty
+  mail
   mysql2
   omniauth-facebook
   rack
