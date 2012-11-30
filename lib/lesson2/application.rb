@@ -1,11 +1,11 @@
 # -*- encoding: utf-8 -*-
 
-require 'sinatra'
+require 'sinatra' 
 require 'erubis'
 require "rack/contrib"
 require "rack"
-require "multi_json"
-#require 'omniauth'#!
+require 'omniauth-facebook'
+
 
 module Lesson2
   class Application < Sinatra::Application
@@ -16,7 +16,9 @@ module Lesson2
     use Rack::CommonLogger
     use Rack::Reloader
 
-  #  use OmniAuth::Strategies::Developer#!
+  configure do###
+    set :out, 'hello world'
+  end###
 
     helpers do
 
@@ -77,27 +79,14 @@ module Lesson2
       #return env['rack.request.form_hash']['id'].to_s
     end
 
-      # auth via FB canvas and signed request param
-  post '/canvas/' do
-    # we just redirect to /auth/facebook here which will parse the
-    # signed_request FB sends us, asking for auth if the user has
-    # not already granted access, or simply moving straight to the
-    # callback where they have already granted access.
-    #
-    # we pass the state parameter which we can detect in our callback
-    # to do custom rendering/redirection for the canvas app page
-    redirect "/auth/facebook?signed_request=#{request.params['signed_request']}&state=canvas"
-  end
-
-
   get '/auth/:provider/callback' do
-    # we can do something special here is +state+ param is canvas
-    # (see notes above in /canvas/ method for more details)
-    #content_type 'application/json'
-    #MultiJson.encode(request.env)
-    :out
+    settings.out = env['omniauth.auth'][:info][:email]#MultiJson.encode(request.env)
+    redirect '/next'
   end
 
+  get '/next' do
+    erb :out
+  end
 
   end
 end

@@ -8,12 +8,10 @@ gem "sinatra"
 gem "erubis"
 gem "httparty"
 gem "ensure-encoding"
-gem "mail"
 gem "mysql2"
 gem "activerecord"
 gem "activerecord-mysql2-adapter"
-gem 'omniauth-facebook'
-gem "multi_json"
+gem "omniauth-facebook"
 
 group :test do
   gem "rspec", "~> 2.7.0"
