@@ -5,6 +5,9 @@ module Lesson2
 	class Todos
 		attr_reader :todo_list, :todo_save
 
+		class Todo < ActiveRecord::Base
+		end
+
 		def list
 			@todo_list = Todo.select("id, head").all
 			return @todo_list

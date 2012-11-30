@@ -1,12 +1,14 @@
 # -*- encoding: utf-8 -*-
 
-require "active_record"
 require 'digest/sha1'
 
 module Lesson2
 
 		class Handle
 		attr_reader :out
+
+		class User < ActiveRecord::Base
+		end
 
 		def initialize(env)
 			@env = env['rack.request.form_hash']

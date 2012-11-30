@@ -9,7 +9,6 @@ module Lesson2
 			@form_vars = env['rack.request.form_hash']
 			@msg = ""
 			@address = env['rack.request.form_hash']
-			#@form_vars = {:name=>"", :email=>"s", :feedback=>"s"} 
 			@field_bool=[]
 			@field_all=true
 			@p

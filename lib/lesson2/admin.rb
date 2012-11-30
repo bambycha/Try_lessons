@@ -5,14 +5,6 @@
 	class Admin
 		attr_reader 
 
-		ActiveRecord::Base.establish_connection(
-		  :adapter  => "mysql2",
-		  :host     => "localhost",
-		  :username => "todo_user",
-		  :password => "foobar",
-		  :database => "todo"
-		)
-
 		class User < ActiveRecord::Base
 		end
 
