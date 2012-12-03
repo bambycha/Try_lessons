@@ -6,7 +6,7 @@ require 'lesson2/handle'
 require 'lesson2/data_valid'
 require 'lesson2/todo'
 require 'lesson2/admin'
-#require 'lesson2/db'
+#require 'lesson2/social'
 module Lesson2
   # Load configuration
   #
@@ -19,5 +19,4 @@ module Lesson2
   def self.root_path
     @root_path ||= Pathname.new( File.dirname(File.expand_path('../', __FILE__)) )
   end
-
 end

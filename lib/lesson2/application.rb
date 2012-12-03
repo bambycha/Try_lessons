@@ -5,19 +5,11 @@ require 'erubis'
 require "rack/contrib"
 require "rack"
 require 'omniauth-facebook'
+require 'warden'
 
 module Lesson2
-  class Application < Sinatra::Application
-    # Configuration
-    set :public_folder, lambda { Lesson2.root_path.join('public').to_s }
-    set :views, lambda { Lesson2.root_path.join('views').to_s }
-    # Middleware
-    use Rack::CommonLogger
-    use Rack::Reloader
-
-  configure do###
-    set :out, 'hello world'
-  end###^
+  
+=begin
 
     helpers do###
 
@@ -34,16 +26,84 @@ module Lesson2
       end
 
     end###^
+=end
+
+class Application < Sinatra::Application
+    # Configuration
+    set :public_folder, lambda { Lesson2.root_path.join('public').to_s }
+    set :views, lambda { Lesson2.root_path.join('views').to_s }
+    # Middleware
+    use Rack::CommonLogger
+    use Rack::Reloader
+    use Rack::Session::Cookie, :secret => "foobar"
+
+    helpers do
+      def current_user
+        warden.user
+      end
+
+      def warden
+        env["warden"]
+      end
+    end
+    ##
+    configure do###
+    set :out, 'hello world'
+    end###^
+
+    use Warden::Manager do |manager|
+      manager.default_strategies :password
+      manager.failure_app = FailureApp.new
+    end
+
+    Warden::Manager.serialize_into_session do |user|
+      puts user.userid
+      puts "nar"
+    end
+
+    Warden::Manager.serialize_from_session do |id|
+      User.get(id)
+      puts "warr"
+    end
+
+Warden::Strategies.add(:password) do
+  def valid?
+    puts '[INFO] password strategy valid?'
+    params['username'] || params['password']
+  end
+  
+  def authenticate!
+    puts '[INFO] password strategy authenticate'
+    #puts "param>>" + params['username'] + "|||" + params['password']
+    u = Handle.authenticate(params['username'], params['password'])
+    @out = u
+    u.nil? ? fail!('Could not login in') : success!(u)
+    #env['warden'].set_user(u)
+  end
+end
+
+  class FailureApp
+    def call(env)
+      puts "fail!!!"
+      uri = env['REQUEST_URI']
+      puts "failure #{env['REQUEST_METHOD']} #{uri}"
+    end
+  end
+##^
 
 
     get '/' do
       erb :index
     end
 
+=begin
     post '/' do
-      @hand = Login.new(env)
+      env['warden'].authenticate!
+      #@hand = Login.new(env)
       erb :index
     end
+=end
+
 
     get '/signup' do
       erb :reg
@@ -66,12 +126,30 @@ module Lesson2
     end
 
     get '/admin' do
-      protected!
+      #protected!
+     # env['warden'].authenticate!
+     puts "sone"
+      redirect '/login' unless env['warden'].user#authenticate?#stored_in_session?#env['warden'].user#(:userid)
       @todo = Todos.new
       @todo_list = @todo.list
       @admin = Admin.new
       @user_list = @admin.user_list
       erb :admin
+    end
+
+    get '/login' do
+      #@outs = 'puts >>' + env['warden'].user if !(env['warden'].user.nil?)
+      erb :login
+    end
+
+    post '/login/?' do
+      if env['warden'].authenticate(:password)
+        redirect '/next'
+      else
+        @outs = "User not found."
+        erb :login
+        #redirect '/login'
+      end
     end
 
     post '/save_todo' do
@@ -80,13 +158,17 @@ module Lesson2
     end
 
   get '/auth/:provider/callback' do
-    settings.out = env['omniauth.auth'][:info][:email]#MultiJson.encode(request.env)
-    redirect '/next'
+    settings.out = env['omniauth.auth']#[:info][:email]#MultiJson.encode(request.env)
+    redirect '/admin'
   end
 
   get '/next' do
+    #Warden::SessionSerializer.new(@env).store(settings.out)
+    settings.out = Warden::SessionSerializer.new(@env).fetch(3)
+    #settings.out = Handle.authenticate("2233965gmail.com", "foobar")
     erb :out
   end
 
   end
+
 end

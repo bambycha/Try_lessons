@@ -1,4 +1,5 @@
 require "active_record"
+
 ActiveRecord::Base.establish_connection(
       :adapter  => "mysql2",
       :host     => "localhost",
@@ -6,3 +7,15 @@ ActiveRecord::Base.establish_connection(
       :password => "foobar",
       :database => "todo"
     )
+
+
+=begin
+
+ActiveRecord::Base.establish_connection(
+      :adapter  => "mysql2",
+      :host     => "localhost",
+      :username => "rails_user",
+      :password => "user",
+      :database => "rails_user"
+    )
+=end

@@ -19,17 +19,28 @@ module Lesson2
 			@time = Time.now.getutc
 		end
 
+
 		def new_user
 			@user = User.find_or_create_by_email(@email,
 				:fname => @fname.to_s,
 				:sname => @sname.to_s,
 				:passwd => @passwd,
 				:date => @time
-				){@out = "Вітаємо! Ви успішно зареєстровані."}
+				){@out = "Вітаємо! Ви успішно зареєстровані."}#if user create @out have msg
 			if @out.blank?
 				@out = "Вибачте, користувач з e-mail адресою - '#{@email}' вже зареєстрований в системі."
 				return false
 			end
+		end
+
+		def self.authenticate(username, password)
+			password = Digest::SHA1.hexdigest password
+			@user = User.find(:first, :conditions => { :email => username, :passwd => password})
+			#puts @user = User.where(["email = ? AND passwd = ?", username, password]).first
+		end
+
+		def self.find_from_session(id)
+			User.find_by_userid(id)
 		end
 
 	end
