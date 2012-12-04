@@ -6,7 +6,7 @@ ActiveRecord::Base.establish_connection(
       :username => "todo_user",
       :password => "foobar",
       :database => "todo"
-    )
+)
 
 
 =begin

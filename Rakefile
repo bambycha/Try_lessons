@@ -7,5 +7,3 @@ task :default => :test
 task :environment do
   require File.expand_path('../config/environment', __FILE__)
 end
-
-Dir.glob('lib/tasks/*.rake').each { |r| import r }

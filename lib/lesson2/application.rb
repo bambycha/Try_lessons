@@ -144,7 +144,7 @@ end
 
     post '/login/?' do
       if env['warden'].authenticate(:password)
-        redirect '/next'
+        redirect '/admin'
       else
         @outs = "User not found."
         erb :login

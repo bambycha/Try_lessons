@@ -1,9 +1,18 @@
-require 'mysql2'
-module Lesson2
-	class Db_build
-		def create
-			connect = Mysql2::Client.new(:host => "localhost", :username => "root", :password => "barfoo");
-			results = Client.query(root_path.join('db', 'install.sql'))
-		end
-	end
-end
+    class CreateTodo < ActiveRecord::Migration do
+
+      def self.up
+
+      create_table :users do |t|
+            t.integer  :userid
+            t.string :fname
+            t.string :sname
+            t.date :date
+            t.string :email
+            t.passwd :passwd
+       end
+
+       add_index :users, :userid, :unique => true
+
+      end
+
+    end
